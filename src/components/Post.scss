@@ -1,0 +1,24 @@
+.post {
+  padding: 25px 0;
+  list-style-type: none;
+  color: #283645;
+
+  &:hover {
+    background-color: #efefef;
+    cursor: pointer;
+
+    & .post__header {
+      text-decoration: underline;
+    }
+  }
+
+  &__header {
+    width: 90%;
+    margin: 0 5% 25px;
+  }
+
+  &__text {
+    width: 90%;
+    margin: 0 5%;
+  }
+}

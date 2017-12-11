@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  align-items: center;
+  height: 450px;
+  background-color: #eaeaea;
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 90%;
+    margin: 0 5%;
+  }
+
+  &__header {
+    font-weight: bold;
+  }
+
+  &__postName {
+    height: 45px;
+    border: 2px solid #e6e6e6;
+    margin-bottom: 20px;
+    padding: 0px 30px;
+  }
+
+  &__postText {
+    border: 2px solid #e6e6e6;
+    margin-bottom: 20px;
+    resize: none;
+    padding: 15px 30px;
+  }
+
+  &__submit {
+    width: 35%;
+    align-self: flex-end;
+    background-color: #222223;
+    border: 2px solid #222223;
+    color: #fff;
+    padding: 12px 0;
+  }
+}
