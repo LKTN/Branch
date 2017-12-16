@@ -2,11 +2,16 @@ import React from 'react';
 
 
 class Post extends React.Component {
+  constructor(props) {
+    super(props);
+    this.title = props.title;
+    this.text = props.text;
+  }
   render() {
     return (
       <article className='post'>
-        <h2 className='post__header'>Соданный пост 1</h2>
-        <p className='post__text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.</p>
+        <h2 className='post__header'>{this.title}</h2>
+        <p className='post__text'>{this.text}</p>
       </article>
     )
   }

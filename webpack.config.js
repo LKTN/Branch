@@ -37,11 +37,5 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'src')
-  },
-  watch: true,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: 1000
   }
-
 }
