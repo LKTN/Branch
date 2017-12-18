@@ -3,7 +3,7 @@ const initialState = {
     {topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.'},
     {topic: 'Соданный пост 2', text: 'Another text.'}
   ],
-  visibilityFilter: 'SHOW_THREE'
+  visibilityPosts: 'SHOW_THREE'
 }
 
 const blogApp = (state = initialState, action) => {
@@ -11,13 +11,14 @@ const blogApp = (state = initialState, action) => {
     case 'ADD_POST':
       return {
         posts: [
+          ...state.posts,
           {
             topic: action.topic,
             text: action.text
-          },
-          ...state.posts
+          }
+          
         ],
-        visibilityFilter: state.visibilityFilter
+        visibilityPosts: state.visibilityPosts
       }
 
     case 'SHOW_THREE':

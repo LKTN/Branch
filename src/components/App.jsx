@@ -6,10 +6,6 @@ import PostList from './PostList.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // let data = JSON.parse(localStorage.getItem('Posts'));
-    // this.state = {
-    //     data: data
-    // };
   }
 
   render () {
