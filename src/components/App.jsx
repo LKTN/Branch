@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header.jsx';
 import Form from './Form.jsx';
 import PostList from './PostList.jsx';
+import Filter from './Filter.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
           <Header />
           <Form />
           <PostList />
+          <Filter />
         </div>
       )
   }

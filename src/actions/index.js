@@ -5,3 +5,9 @@ export const addPost = (topic, text) => {
       text: text
     }
   }
+
+export const toggleFilter = () => {
+    return {
+      type: 'TOGGLE_FILTER'
+    }
+  }

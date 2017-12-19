@@ -20,12 +20,6 @@ let Form = ({ dispatch }) => {
               return
             }
 
-            var data = {
-              topic: postHeader,
-              text: postText
-            }
-            console.log(data);
-
             dispatch( addPost(postHeader, postText) )
 
             document.getElementsByClassName('form__postName')[0].value = '';

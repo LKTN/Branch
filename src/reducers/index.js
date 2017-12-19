@@ -3,7 +3,7 @@ const initialState = {
     {topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.'},
     {topic: 'Соданный пост 2', text: 'Another text.'}
   ],
-  visibilityPosts: 'SHOW_THREE'
+  showAll: false
 }
 
 const blogApp = (state = initialState, action) => {
@@ -18,13 +18,15 @@ const blogApp = (state = initialState, action) => {
           }
           
         ],
-        visibilityPosts: state.visibilityPosts
+        showAll: state.showAll
       }
 
-    case 'SHOW_THREE':
-      return state
-    case 'SHOW_ALL':
-      return state
+    case 'TOGGLE_FILTER':
+      return {
+        posts: state.posts,
+        showAll: !state.showAll
+      }
+      
     default:
       return state
   }
