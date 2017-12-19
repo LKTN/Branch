@@ -1,31 +1,16 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Header from './components/Header.jsx';
-import Form from './components/Form.jsx';
-import Post from './components/Post.jsx';
-import './style.scss'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import blogApp from './reducers/index.js';
+import App from './components/App.jsx';
+import './style.scss';
 
-var post = [{topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.'}]
-localStorage.setItem('Posts', JSON.stringify(post));
+let store = createStore(blogApp);
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    let data = JSON.parse(localStorage.getItem('Posts'));
-    this.state = {
-        data: data
-    };
-  }
-
-  render () {
-    return (
-        <div>
-          <Header />
-          <Form />
-          <Post /><Post /><Post />
-        </div>
-      )
-  }
-}
-
-render(<App/>, document.getElementById('react-app'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('react-app')
+);
