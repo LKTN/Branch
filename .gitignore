@@ -1,2 +1,2 @@
-dist/*bundle*
+src/dist/
 node_modules/

@@ -2,15 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { toggleFilter } from '../actions/index.js'
 
-const filter = (state) => {
+let Filter = (props) => {
   return (
-    <div className='filter' onClick={() => state.onFilterClick()}>
-      <span className='filter__text'>{state.showAll ? 'Скрыть' : 'Показать еще'}</span>
+    <div className='filter' onClick={() => props.onFilterClick()}>
+      <span className='filter__text'>{props.showAll ? 'Скрыть' : 'Показать еще'}</span>
     </div>
   )
 }
+
 const mapStateToProps = state => {
-  return state
+  return { showAll: state.showAll }
 }
 
 const mapDispatchToProps = ( dispatch ) => {
@@ -21,6 +22,6 @@ const mapDispatchToProps = ( dispatch ) => {
   }
 }
 
-const Filter = connect(mapStateToProps, mapDispatchToProps)(filter);
+Filter = connect(mapStateToProps, mapDispatchToProps)(Filter);
 
 export default Filter

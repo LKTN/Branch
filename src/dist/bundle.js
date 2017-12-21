@@ -21203,7 +21203,7 @@ Object.defineProperty(exports, "__esModule", {
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var initialState = {
-  posts: [{ topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.' }, { topic: 'Соданный пост 2', text: 'Another text.' }],
+  posts: [{ topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.' }, { topic: 'Соданный пост 2', text: '[mapDispatchToProps(dispatch, [ownProps]): dispatchProps] (Object or Function): If an object is passed, each function inside it is assumed to be a Redux action creator. An object with the same function names, but with every action creator wrapped into a dispatch call so they may be invoked directly, will be merged into the component\’s props.' }],
   showAll: false
 };
 
@@ -21245,8 +21245,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21269,42 +21267,57 @@ var _Filter2 = _interopRequireDefault(_Filter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    _classCallCheck(this, App);
-
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-  }
-
-  _createClass(App, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_Header2.default, null),
-        _react2.default.createElement(_Form2.default, null),
-        _react2.default.createElement(_PostList2.default, null),
-        _react2.default.createElement(_Filter2.default, null)
-      );
-    }
-  }]);
-
-  return App;
-}(_react2.default.Component);
+var App = function App() {
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_Header2.default, null),
+    _react2.default.createElement(_Form2.default, null),
+    _react2.default.createElement(_PostList2.default, null),
+    _react2.default.createElement(_Filter2.default, null)
+  );
+};
 
 exports.default = App;
 
 /***/ }),
 /* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Header = function Header() {
+  return _react2.default.createElement(
+    'header',
+    { className: 'header' },
+    _react2.default.createElement(
+      'span',
+      { className: 'header__headText' },
+      _react2.default.createElement(
+        'strong',
+        { className: 'header__headBoldText' },
+        'Test'
+      ),
+      ' you skill'
+    )
+  );
+};
+
+exports.default = Header;
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21320,6 +21333,10 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(7);
+
+var _index = __webpack_require__(29);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21328,100 +21345,62 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Header = function (_React$Component) {
-  _inherits(Header, _React$Component);
+var Form = function (_React$Component) {
+  _inherits(Form, _React$Component);
 
-  function Header() {
-    _classCallCheck(this, Header);
+  function Form() {
+    _classCallCheck(this, Form);
 
-    return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Form.__proto__ || Object.getPrototypeOf(Form)).apply(this, arguments));
   }
 
-  _createClass(Header, [{
+  _createClass(Form, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
-        'header',
-        { className: 'header' },
+        'div',
+        { className: 'form' },
         _react2.default.createElement(
-          'span',
-          { className: 'header__headText' },
+          'form',
+          { className: 'form__fields' },
           _react2.default.createElement(
-            'strong',
-            { className: 'header__headBoldText' },
-            'Test'
+            'p',
+            { className: 'form__header' },
+            '\u0424\u043E\u0440\u043C\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043F\u043E\u0441\u0442\u0430'
           ),
-          ' you skill'
+          _react2.default.createElement('input', { type: 'text', name: 'postName', className: 'form__postName', placeholder: '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u0441\u0442\u0430', ref: function ref(topic) {
+              _this2.topic = topic;
+            } }),
+          _react2.default.createElement('textarea', { rows: '10', cols: '45', name: 'postText', className: 'form__postText', placeholder: '\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435 \u043F\u043E\u0441\u0442\u0430', ref: function ref(text) {
+              _this2.text = text;
+            } }),
+          _react2.default.createElement('input', { type: 'submit', value: '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0441\u0442', className: 'form__submit', onClick: function onClick(evt) {
+              evt.preventDefault();
+
+              var topic = _this2.topic.value;
+              var text = _this2.text.value;
+
+              if (!topic.trim() || !text.trim()) {
+                alert('Некорректные данные!');
+                return;
+              }
+
+              _this2.props.dispatch((0, _index.addPost)(topic, text));
+
+              _this2.topic.value = '';
+              _this2.text.value = '';
+            } })
         )
       );
     }
   }]);
 
-  return Header;
+  return Form;
 }(_react2.default.Component);
 
-exports.default = Header;
-
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(7);
-
-var _index = __webpack_require__(29);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Form = function Form(_ref) {
-  var dispatch = _ref.dispatch;
-
-  return _react2.default.createElement(
-    'div',
-    { className: 'form' },
-    _react2.default.createElement(
-      'form',
-      { className: 'form__fields' },
-      _react2.default.createElement(
-        'p',
-        { className: 'form__header' },
-        '\u0424\u043E\u0440\u043C\u0430 \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u044F \u043F\u043E\u0441\u0442\u0430'
-      ),
-      _react2.default.createElement('input', { type: 'text', name: 'postName', className: 'form__postName', placeholder: '\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043F\u043E\u0441\u0442\u0430' }),
-      _react2.default.createElement('textarea', { rows: '10', cols: '45', name: 'postText', className: 'form__postText', placeholder: '\u0421\u043E\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0435 \u043F\u043E\u0441\u0442\u0430' }),
-      _react2.default.createElement('input', { type: 'submit', value: '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0441\u0442', className: 'form__submit', onClick: function onClick(evt) {
-          evt.preventDefault();
-
-          var postHeader = document.getElementsByClassName('form__postName')[0].value;
-          var postText = document.getElementsByClassName('form__postText')[0].value;
-
-          if (!postText.trim() || !postHeader.trim()) {
-            alert('Некорректные данные!');
-            return;
-          }
-
-          dispatch((0, _index.addPost)(postHeader, postText));
-
-          document.getElementsByClassName('form__postName')[0].value = '';
-          document.getElementsByClassName('form__postText')[0].value = '';
-        } })
-    )
-  );
-};
-
-Form = (0, _reactRedux.connect)()(Form);
-
-exports.default = Form;
+exports.default = (0, _reactRedux.connect)()(Form);
 
 /***/ }),
 /* 74 */
@@ -21459,12 +21438,13 @@ var postList = function postList(_ref) {
   var posts = _ref.posts,
       showAll = _ref.showAll;
 
+
   var listPosts = posts.map(function (post, ind) {
-    return _react2.default.createElement(_Post2.default, { title: post.topic, text: post.text, key: ind });
+    return _react2.default.createElement(_Post2.default, { title: post.topic, text: post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text, key: ind });
   }).reverse();
 
   if (!showAll) {
-    listPosts.splice(3);
+    listPosts.splice(2);
   }
 
   return listPosts;
@@ -21484,56 +21464,22 @@ exports.default = PostList;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(1);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Post = function (_React$Component) {
-  _inherits(Post, _React$Component);
-
-  function Post(props) {
-    _classCallCheck(this, Post);
-
-    var _this = _possibleConstructorReturn(this, (Post.__proto__ || Object.getPrototypeOf(Post)).call(this, props));
-
-    _this.title = props.title;
-    _this.text = props.text;
-    return _this;
-  }
-
-  _createClass(Post, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'article',
-        { className: 'post' },
-        _react2.default.createElement(
-          'h2',
-          { className: 'post__header' },
-          this.title
-        ),
-        _react2.default.createElement(
-          'p',
-          { className: 'post__text' },
-          this.text
-        )
-      );
-    }
-  }]);
-
-  return Post;
-}(_react2.default.Component);
+var Post = function Post(props) {
+  return React.createElement(
+    'article',
+    { className: 'post' },
+    React.createElement(
+      'h2',
+      { className: 'post__header' },
+      props.title
+    ),
+    React.createElement(
+      'p',
+      { className: 'post__text' },
+      props.text
+    )
+  );
+};
 
 exports.default = Post;
 
@@ -21558,21 +21504,22 @@ var _index = __webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var filter = function filter(state) {
+var Filter = function Filter(props) {
   return _react2.default.createElement(
     'div',
     { className: 'filter', onClick: function onClick() {
-        return state.onFilterClick();
+        return props.onFilterClick();
       } },
     _react2.default.createElement(
       'span',
       { className: 'filter__text' },
-      state.showAll ? 'Скрыть' : 'Показать еще'
+      props.showAll ? 'Скрыть' : 'Показать еще'
     )
   );
 };
+
 var mapStateToProps = function mapStateToProps(state) {
-  return state;
+  return { showAll: state.showAll };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -21583,7 +21530,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-var Filter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(filter);
+Filter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Filter);
 
 exports.default = Filter;
 

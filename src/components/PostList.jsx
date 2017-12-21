@@ -8,13 +8,14 @@ const mapStateToProps = state => {
       return state
     case false:
       return state
+    default:
+      return state
   }
-
 }
 
 let postList = ({posts, showAll}) => {
     var listPosts = posts.map((post, ind) => (
-      <Post title={post.topic} text={post.text} key={ind} />
+      <Post title={post.topic} text={post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text} key={ind} />
     )).reverse();
 
     if(!showAll) {
@@ -23,7 +24,6 @@ let postList = ({posts, showAll}) => {
 
     return listPosts; 
 }
-
 
 const PostList = connect(
   mapStateToProps

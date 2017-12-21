@@ -2,34 +2,34 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { addPost } from '../actions/index.js';
 
-let Form = ({ dispatch }) => {
-  return (
+class Form extends React.Component {
+  render() {
+    return (
       <div className='form'>
         <form className='form__fields'>
           <p className='form__header'>Форма создания поста</p>
-          <input type='text' name='postName' className='form__postName' placeholder='Название поста' />
-          <textarea rows="10" cols="45" name="postText" className='form__postText' placeholder='Содержание поста'></textarea>
+          <input type='text' name='postName' className='form__postName' placeholder='Название поста' ref={ (topic) => {this.topic = topic} }/>
+          <textarea rows="10" cols="45" name="postText" className='form__postText' placeholder='Содержание поста' ref={ (text) => {this.text = text} }></textarea>
           <input type="submit" value="Создать пост" className='form__submit' onClick={(evt) => {
             evt.preventDefault();
 
-            var postHeader = document.getElementsByClassName('form__postName')[0].value;
-            var postText = document.getElementsByClassName('form__postText')[0].value;
+            let topic = this.topic.value;
+            let text = this.text.value;
 
-            if(!postText.trim() || !postHeader.trim()) {
+            if( !topic.trim() || !text.trim() ) {
               alert('Некорректные данные!');
               return
             }
 
-            dispatch( addPost(postHeader, postText) )
+            this.props.dispatch( addPost(topic, text) )
 
-            document.getElementsByClassName('form__postName')[0].value = '';
-            document.getElementsByClassName('form__postText')[0].value = '';
+            this.topic.value = '';
+            this.text.value = '';
           }} />
         </form>
       </div>
     )  
+  }
 }
 
-Form = connect()(Form);
-
-export default Form;
+export default connect()(Form);
