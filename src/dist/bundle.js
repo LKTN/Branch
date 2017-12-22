@@ -1975,19 +1975,28 @@ var _reactRedux = __webpack_require__(7);
 
 var _redux = __webpack_require__(21);
 
-var _index = __webpack_require__(70);
+var _localStorage = __webpack_require__(70);
+
+var _index = __webpack_require__(71);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _App = __webpack_require__(71);
+var _App = __webpack_require__(72);
 
 var _App2 = _interopRequireDefault(_App);
 
-__webpack_require__(77);
+__webpack_require__(78);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_index2.default);
+var persistedState = (0, _localStorage.loadState)();
+var store = (0, _redux.createStore)(_index2.default, persistedState);
+
+store.subscribe(function () {
+  (0, _localStorage.saveState)({
+    posts: store.getState().posts
+  });
+});
 
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -21199,6 +21208,36 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var loadState = exports.loadState = function loadState() {
+  try {
+    var serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
+
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+var saveState = exports.saveState = function saveState(state) {
+  try {
+    var serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (err) {}
+};
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -21235,7 +21274,7 @@ var blogApp = function blogApp() {
 exports.default = blogApp;
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21249,19 +21288,19 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Header = __webpack_require__(72);
+var _Header = __webpack_require__(73);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Form = __webpack_require__(73);
+var _Form = __webpack_require__(74);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _PostList = __webpack_require__(74);
+var _PostList = __webpack_require__(75);
 
 var _PostList2 = _interopRequireDefault(_PostList);
 
-var _Filter = __webpack_require__(76);
+var _Filter = __webpack_require__(77);
 
 var _Filter2 = _interopRequireDefault(_Filter);
 
@@ -21281,7 +21320,7 @@ var App = function App() {
 exports.default = App;
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21317,7 +21356,7 @@ var Header = function Header() {
 exports.default = Header;
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21403,7 +21442,7 @@ var Form = function (_React$Component) {
 exports.default = (0, _reactRedux.connect)()(Form);
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21419,7 +21458,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(7);
 
-var _Post = __webpack_require__(75);
+var _Post = __webpack_require__(76);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -21431,13 +21470,14 @@ var mapStateToProps = function mapStateToProps(state) {
       return state;
     case false:
       return state;
+    default:
+      return state;
   }
 };
 
 var postList = function postList(_ref) {
   var posts = _ref.posts,
       showAll = _ref.showAll;
-
 
   var listPosts = posts.map(function (post, ind) {
     return _react2.default.createElement(_Post2.default, { title: post.topic, text: post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text, key: ind });
@@ -21455,7 +21495,7 @@ var PostList = (0, _reactRedux.connect)(mapStateToProps)(postList);
 exports.default = PostList;
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21464,16 +21504,23 @@ exports.default = PostList;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var Post = function Post(props) {
-  return React.createElement(
+  return _react2.default.createElement(
     'article',
     { className: 'post' },
-    React.createElement(
+    _react2.default.createElement(
       'h2',
       { className: 'post__header' },
       props.title
     ),
-    React.createElement(
+    _react2.default.createElement(
       'p',
       { className: 'post__text' },
       props.text
@@ -21484,7 +21531,7 @@ var Post = function Post(props) {
 exports.default = Post;
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21535,13 +21582,13 @@ Filter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Filter);
 exports.default = Filter;
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(78);
+var content = __webpack_require__(79);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -21549,7 +21596,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(80)(content, options);
+var update = __webpack_require__(81)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -21566,10 +21613,10 @@ if(false) {
 }
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(79)(undefined);
+exports = module.exports = __webpack_require__(80)(undefined);
 // imports
 
 
@@ -21580,7 +21627,7 @@ exports.push([module.i, "/*! normalize.css v5.0.0 | MIT License | github.com/nec
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports) {
 
 /*
@@ -21662,7 +21709,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -21718,7 +21765,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(81);
+var	fixUrls = __webpack_require__(82);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -22034,7 +22081,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports) {
 
 
