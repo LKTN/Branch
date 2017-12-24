@@ -1,24 +1,16 @@
 import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { loadState, saveState } from './localStorage.js'
-import blogApp from './reducers/index.js';
+import configureStore from './configureStore.js';
 import App from './components/App.jsx';
 import './style.scss';
 
-const persistedState = loadState();
-const store = createStore(blogApp, persistedState);
-
-store.subscribe( () => {
-  saveState({
-    posts: store.getState().posts
-  });
-});
+const store = configureStore();
 
 render(
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+  ,
   document.getElementById('react-app')
 );
