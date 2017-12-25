@@ -1,24 +1,27 @@
 .post {
-  padding: 25px 0;
   list-style-type: none;
   color: #283645;
 
-  &:hover {
-    background-color: #efefef;
-    cursor: pointer;
-
-    & .post__header {
-      text-decoration: underline;
-    }
-  }
-
   &__header {
-    width: 90%;
-    margin: 0 5% 25px;
+    display: block;
+    font-size: 1.5em;
+    padding: 20px 5% 0;
+    color: #283645;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      background-color: #efefef;
+
+      & ~ p {
+        background-color: #efefef;
+      }
+    }
   }
 
   &__text {
     width: 90%;
-    margin: 0 5%;
+    padding: 25px 5%;
+    margin: 0;
   }
 }
