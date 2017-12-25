@@ -1,8 +1,11 @@
+import uuidv4 from 'uuid/v4';
+
 export const addPost = (topic, text) => {
     return {
       type: 'ADD_POST',
       topic: topic,
-      text: text
+      text: text,
+      id: uuidv4()
     }
   }
 

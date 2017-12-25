@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import DetailView from './DetailView.jsx';
 import Header from './Header.jsx';
 import Form from './Form.jsx';
 import PostList from './PostList.jsx';
@@ -21,8 +22,8 @@ let App = () => {
         
         <Switch>
           <Route exact path='/' component={() => (<div><Form /><PostList /><Filter /></div>)} />
-          <Route path='/:id' component={App2} />
-          <Route component={FourOhFour} />      
+          <Route path='/:id' component={DetailView} />
+          <Route component={FourOhFour} />
         </Switch>
       </div>
     </BrowserRouter>
