@@ -3468,7 +3468,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.toggleFilter = exports.addPost = undefined;
 
-var _v = __webpack_require__(134);
+var _v = __webpack_require__(135);
 
 var _v2 = _interopRequireDefault(_v);
 
@@ -3512,7 +3512,7 @@ var _App = __webpack_require__(104);
 
 var _App2 = _interopRequireDefault(_App);
 
-__webpack_require__(140);
+__webpack_require__(141);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23285,15 +23285,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(44);
 
-var _DetailView = __webpack_require__(130);
+var _DetailPost = __webpack_require__(130);
 
-var _DetailView2 = _interopRequireDefault(_DetailView);
+var _DetailPost2 = _interopRequireDefault(_DetailPost);
 
-var _Header = __webpack_require__(131);
+var _Header = __webpack_require__(132);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _IndexWrapper = __webpack_require__(132);
+var _IndexWrapper = __webpack_require__(133);
 
 var _IndexWrapper2 = _interopRequireDefault(_IndexWrapper);
 
@@ -23319,7 +23319,7 @@ var App = function App() {
         _reactRouterDom.Switch,
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _IndexWrapper2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/:id', component: _DetailView2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/:id', component: _DetailPost2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { component: FourOhFour })
       )
     )
@@ -26304,40 +26304,74 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
+var _BackButton = __webpack_require__(131);
+
+var _BackButton2 = _interopRequireDefault(_BackButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DetailView = function DetailView(props) {
-  console.log(props);
   var currentPost = props.posts.find(function (post) {
     return post.id === props.match.params.id;
   });
-
+  console.log(props);
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'detailPost' },
+    _react2.default.createElement(_BackButton2.default, { className: 'detailPost__backButton', goBack: props.history.goBack }),
     _react2.default.createElement(
       'h1',
-      null,
+      { className: 'detailPost__topic' },
       currentPost.topic
     ),
     _react2.default.createElement(
       'p',
-      null,
+      { className: 'detailPost__text' },
       currentPost.text
     )
   );
 };
 
-var mapStateToProps = function mapStateToProps(state) {
+DetailView = (0, _reactRedux.connect)(function (state) {
   return state;
-};
-
-DetailView = (0, _reactRedux.connect)(mapStateToProps)(DetailView);
+})(DetailView);
 
 exports.default = DetailView;
 
 /***/ }),
 /* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var BackButton = function BackButton(props) {
+  return _react2.default.createElement(
+    'button',
+    {
+      className: 'backButton ' + (props.className ? props.className : ''),
+      onClick: function onClick() {
+        props.goBack();
+      }
+    },
+    'Back'
+  );
+};
+
+exports.default = BackButton;
+
+/***/ }),
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26373,7 +26407,7 @@ var Header = function Header() {
 exports.default = Header;
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26387,15 +26421,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Form = __webpack_require__(133);
+var _Form = __webpack_require__(134);
 
 var _Form2 = _interopRequireDefault(_Form);
 
-var _PostList = __webpack_require__(137);
+var _PostList = __webpack_require__(138);
 
 var _PostList2 = _interopRequireDefault(_PostList);
 
-var _Filter = __webpack_require__(139);
+var _Filter = __webpack_require__(140);
 
 var _Filter2 = _interopRequireDefault(_Filter);
 
@@ -26414,7 +26448,7 @@ var IndexWrapper = function IndexWrapper() {
 exports.default = IndexWrapper;
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26458,7 +26492,7 @@ var Form = function (_React$Component) {
 
       return _react2.default.createElement(
         'form',
-        { className: 'form ' + this.props.className },
+        { className: 'form ' + (this.props.className ? this.props.className : '') },
         _react2.default.createElement(
           'p',
           { className: 'form__header' },
@@ -26496,11 +26530,11 @@ var Form = function (_React$Component) {
 exports.default = (0, _reactRedux.connect)()(Form);
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var rng = __webpack_require__(135);
-var bytesToUuid = __webpack_require__(136);
+var rng = __webpack_require__(136);
+var bytesToUuid = __webpack_require__(137);
 
 function v4(options, buf, offset) {
   var i = buf && offset || 0;
@@ -26531,7 +26565,7 @@ module.exports = v4;
 
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
@@ -26571,7 +26605,7 @@ module.exports = rng;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports) {
 
 /**
@@ -26600,7 +26634,7 @@ module.exports = bytesToUuid;
 
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26616,7 +26650,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(8);
 
-var _Post = __webpack_require__(138);
+var _Post = __webpack_require__(139);
 
 var _Post2 = _interopRequireDefault(_Post);
 
@@ -26644,7 +26678,7 @@ var PostList = (0, _reactRedux.connect)(function (state) {
 exports.default = PostList;
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26695,7 +26729,7 @@ var Post = function Post(props) {
 exports.default = Post;
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26718,7 +26752,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Filter = function Filter(props) {
   return _react2.default.createElement(
     'div',
-    { className: 'filter ' + props.className, onClick: function onClick() {
+    { className: 'filter ' + (props.className ? props.className : ''), onClick: function onClick() {
         return props.onFilterClick();
       } },
     _react2.default.createElement(
@@ -26746,13 +26780,13 @@ Filter = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Filter);
 exports.default = Filter;
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(141);
+var content = __webpack_require__(142);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -26760,7 +26794,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(143)(content, options);
+var update = __webpack_require__(144)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -26777,21 +26811,21 @@ if(false) {
 }
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(142)(undefined);
+exports = module.exports = __webpack_require__(143)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */\n/**\r\n * 1. Change the default font family in all browsers (opinionated).\r\n * 2. Correct the line height in all browsers.\r\n * 3. Prevent adjustments of font size after orientation changes in\r\n *    IE on Windows Phone and in iOS.\r\n */\n/* Document\r\n   ========================================================================== */\nhtml {\n  font-family: sans-serif;\n  /* 1 */\n  line-height: 1.15;\n  /* 2 */\n  -ms-text-size-adjust: 100%;\n  /* 3 */\n  -webkit-text-size-adjust: 100%;\n  /* 3 */ }\n\n/* Sections\r\n   ========================================================================== */\n/**\r\n * Remove the margin in all browsers (opinionated).\r\n */\nbody {\n  margin: 0; }\n\n/**\r\n * Add the correct display in IE 9-.\r\n */\narticle,\naside,\nfooter,\nheader,\nnav,\nsection {\n  display: block; }\n\n/**\r\n * Correct the font size and margin on `h1` elements within `section` and\r\n * `article` contexts in Chrome, Firefox, and Safari.\r\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0; }\n\n/* Grouping content\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in IE.\r\n */\nfigcaption,\nfigure,\nmain {\n  /* 1 */\n  display: block; }\n\n/**\r\n * Add the correct margin in IE 8.\r\n */\nfigure {\n  margin: 1em 40px; }\n\n/**\r\n * 1. Add the correct box sizing in Firefox.\r\n * 2. Show the overflow in Edge and IE.\r\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */ }\n\n/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n */\npre {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */ }\n\n/* Text-level semantics\r\n   ========================================================================== */\n/**\r\n * 1. Remove the gray background on active links in IE 10.\r\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\r\n */\na {\n  background-color: transparent;\n  /* 1 */\n  -webkit-text-decoration-skip: objects;\n  /* 2 */ }\n\n/**\r\n * Remove the outline on focused links when they are also active or hovered\r\n * in all browsers (opinionated).\r\n */\na:active,\na:hover {\n  outline-width: 0; }\n\n/**\r\n * 1. Remove the bottom border in Firefox 39-.\r\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\r\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */ }\n\n/**\r\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\r\n */\nb,\nstrong {\n  font-weight: inherit; }\n\n/**\r\n * Add the correct font weight in Chrome, Edge, and Safari.\r\n */\nb,\nstrong {\n  font-weight: bolder; }\n\n/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */ }\n\n/**\r\n * Add the correct font style in Android 4.3-.\r\n */\ndfn {\n  font-style: italic; }\n\n/**\r\n * Add the correct background and color in IE 9-.\r\n */\nmark {\n  background-color: #ff0;\n  color: #000; }\n\n/**\r\n * Add the correct font size in all browsers.\r\n */\nsmall {\n  font-size: 80%; }\n\n/**\r\n * Prevent `sub` and `sup` elements from affecting the line height in\r\n * all browsers.\r\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline; }\n\nsub {\n  bottom: -0.25em; }\n\nsup {\n  top: -0.5em; }\n\n/* Embedded content\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n */\naudio,\nvideo {\n  display: inline-block; }\n\n/**\r\n * Add the correct display in iOS 4-7.\r\n */\naudio:not([controls]) {\n  display: none;\n  height: 0; }\n\n/**\r\n * Remove the border on images inside links in IE 10-.\r\n */\nimg {\n  border-style: none; }\n\n/**\r\n * Hide the overflow in IE.\r\n */\nsvg:not(:root) {\n  overflow: hidden; }\n\n/* Forms\r\n   ========================================================================== */\n/**\r\n * 1. Change the font styles in all browsers (opinionated).\r\n * 2. Remove the margin in Firefox and Safari.\r\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: sans-serif;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */ }\n\n/**\r\n * Show the overflow in IE.\r\n * 1. Show the overflow in Edge.\r\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible; }\n\n/**\r\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\r\n * 1. Remove the inheritance of text transform in Firefox.\r\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none; }\n\n/**\r\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\r\n *    controls in Android 4.\r\n * 2. Correct the inability to style clickable types in iOS and Safari.\r\n */\nbutton,\nhtml [type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n  /* 2 */ }\n\n/**\r\n * Remove the inner border and padding in Firefox.\r\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0; }\n\n/**\r\n * Restore the focus styles unset by the previous rule.\r\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText; }\n\n/**\r\n * Change the border, margin, and padding in all browsers (opinionated).\r\n */\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em; }\n\n/**\r\n * 1. Correct the text wrapping in Edge and IE.\r\n * 2. Correct the color inheritance from `fieldset` elements in IE.\r\n * 3. Remove the padding so developers are not caught out when they zero out\r\n *    `fieldset` elements in all browsers.\r\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */ }\n\n/**\r\n * 1. Add the correct display in IE 9-.\r\n * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.\r\n */\nprogress {\n  display: inline-block;\n  /* 1 */\n  vertical-align: baseline;\n  /* 2 */ }\n\n/**\r\n * Remove the default vertical scrollbar in IE.\r\n */\ntextarea {\n  overflow: auto; }\n\n/**\r\n * 1. Add the correct box sizing in IE 10-.\r\n * 2. Remove the padding in IE 10-.\r\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */ }\n\n/**\r\n * Correct the cursor style of increment and decrement buttons in Chrome.\r\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n\n/**\r\n * 1. Correct the odd appearance in Chrome and Safari.\r\n * 2. Correct the outline style in Safari.\r\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */ }\n\n/**\r\n * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.\r\n */\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\n/**\r\n * 1. Correct the inability to style clickable types in iOS and Safari.\r\n * 2. Change font properties to `inherit` in Safari.\r\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */ }\n\n/* Interactive\r\n   ========================================================================== */\n/*\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in Edge, IE, and Firefox.\r\n */\ndetails,\nmenu {\n  display: block; }\n\n/*\r\n * Add the correct display in all browsers.\r\n */\nsummary {\n  display: list-item; }\n\n/* Scripting\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n */\ncanvas {\n  display: inline-block; }\n\n/**\r\n * Add the correct display in IE.\r\n */\ntemplate {\n  display: none; }\n\n/* Hidden\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 10-.\r\n */\n[hidden] {\n  display: none; }\n\n.indexWrapper__form {\n  width: 90%;\n  padding: 15px 5% 30px;\n  background-color: #eaeaea; }\n\n.indexWrapper__filter {\n  width: 90%;\n  margin: 0 5% 25px; }\n\n.header {\n  display: flex;\n  align-items: center;\n  height: 50px;\n  background-color: #222223;\n  color: #fff; }\n  .header__headText {\n    width: 90%;\n    margin: 0 5%;\n    font-style: italic; }\n\n.form {\n  display: flex;\n  flex-direction: column; }\n  .form__header {\n    font-weight: bold; }\n  .form__postName {\n    height: 45px;\n    border: 2px solid #e6e6e6;\n    margin-bottom: 20px;\n    padding: 0px 30px; }\n  .form__postText {\n    border: 2px solid #e6e6e6;\n    margin-bottom: 20px;\n    resize: none;\n    padding: 15px 30px; }\n  .form__submit {\n    width: 35%;\n    align-self: flex-end;\n    background-color: #222223;\n    border: 2px solid #222223;\n    color: #fff;\n    padding: 12px 0; }\n\n.post {\n  list-style-type: none;\n  color: #283645; }\n  .post--active {\n    background-color: #efefef; }\n    .post--active > .post__wrapper {\n      border-top: 1px solid #E2DEDE;\n      border-bottom: 1px solid #E2DEDE; }\n  .post__wrapper {\n    width: 90%;\n    margin: 0 5%;\n    padding: 30px 0;\n    border-top: 1px solid #fff;\n    border-bottom: 1px solid #fff; }\n  .post__header {\n    font-size: 1.5em;\n    color: #283645;\n    text-decoration: none; }\n    .post__header:hover {\n      text-decoration: underline; }\n  .post__text {\n    width: 90%;\n    margin-top: 15px; }\n\n.filter {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #efefef;\n  cursor: pointer;\n  height: 40px; }\n  .filter__text {\n    color: #283645; }\n", ""]);
+exports.push([module.i, "/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */\n/**\r\n * 1. Change the default font family in all browsers (opinionated).\r\n * 2. Correct the line height in all browsers.\r\n * 3. Prevent adjustments of font size after orientation changes in\r\n *    IE on Windows Phone and in iOS.\r\n */\n/* Document\r\n   ========================================================================== */\nhtml {\n  font-family: sans-serif;\n  /* 1 */\n  line-height: 1.15;\n  /* 2 */\n  -ms-text-size-adjust: 100%;\n  /* 3 */\n  -webkit-text-size-adjust: 100%;\n  /* 3 */ }\n\n/* Sections\r\n   ========================================================================== */\n/**\r\n * Remove the margin in all browsers (opinionated).\r\n */\nbody {\n  margin: 0; }\n\n/**\r\n * Add the correct display in IE 9-.\r\n */\narticle,\naside,\nfooter,\nheader,\nnav,\nsection {\n  display: block; }\n\n/**\r\n * Correct the font size and margin on `h1` elements within `section` and\r\n * `article` contexts in Chrome, Firefox, and Safari.\r\n */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0; }\n\n/* Grouping content\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in IE.\r\n */\nfigcaption,\nfigure,\nmain {\n  /* 1 */\n  display: block; }\n\n/**\r\n * Add the correct margin in IE 8.\r\n */\nfigure {\n  margin: 1em 40px; }\n\n/**\r\n * 1. Add the correct box sizing in Firefox.\r\n * 2. Show the overflow in Edge and IE.\r\n */\nhr {\n  box-sizing: content-box;\n  /* 1 */\n  height: 0;\n  /* 1 */\n  overflow: visible;\n  /* 2 */ }\n\n/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n */\npre {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */ }\n\n/* Text-level semantics\r\n   ========================================================================== */\n/**\r\n * 1. Remove the gray background on active links in IE 10.\r\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\r\n */\na {\n  background-color: transparent;\n  /* 1 */\n  -webkit-text-decoration-skip: objects;\n  /* 2 */ }\n\n/**\r\n * Remove the outline on focused links when they are also active or hovered\r\n * in all browsers (opinionated).\r\n */\na:active,\na:hover {\n  outline-width: 0; }\n\n/**\r\n * 1. Remove the bottom border in Firefox 39-.\r\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\r\n */\nabbr[title] {\n  border-bottom: none;\n  /* 1 */\n  text-decoration: underline;\n  /* 2 */\n  text-decoration: underline dotted;\n  /* 2 */ }\n\n/**\r\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\r\n */\nb,\nstrong {\n  font-weight: inherit; }\n\n/**\r\n * Add the correct font weight in Chrome, Edge, and Safari.\r\n */\nb,\nstrong {\n  font-weight: bolder; }\n\n/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n */\ncode,\nkbd,\nsamp {\n  font-family: monospace, monospace;\n  /* 1 */\n  font-size: 1em;\n  /* 2 */ }\n\n/**\r\n * Add the correct font style in Android 4.3-.\r\n */\ndfn {\n  font-style: italic; }\n\n/**\r\n * Add the correct background and color in IE 9-.\r\n */\nmark {\n  background-color: #ff0;\n  color: #000; }\n\n/**\r\n * Add the correct font size in all browsers.\r\n */\nsmall {\n  font-size: 80%; }\n\n/**\r\n * Prevent `sub` and `sup` elements from affecting the line height in\r\n * all browsers.\r\n */\nsub,\nsup {\n  font-size: 75%;\n  line-height: 0;\n  position: relative;\n  vertical-align: baseline; }\n\nsub {\n  bottom: -0.25em; }\n\nsup {\n  top: -0.5em; }\n\n/* Embedded content\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n */\naudio,\nvideo {\n  display: inline-block; }\n\n/**\r\n * Add the correct display in iOS 4-7.\r\n */\naudio:not([controls]) {\n  display: none;\n  height: 0; }\n\n/**\r\n * Remove the border on images inside links in IE 10-.\r\n */\nimg {\n  border-style: none; }\n\n/**\r\n * Hide the overflow in IE.\r\n */\nsvg:not(:root) {\n  overflow: hidden; }\n\n/* Forms\r\n   ========================================================================== */\n/**\r\n * 1. Change the font styles in all browsers (opinionated).\r\n * 2. Remove the margin in Firefox and Safari.\r\n */\nbutton,\ninput,\noptgroup,\nselect,\ntextarea {\n  font-family: sans-serif;\n  /* 1 */\n  font-size: 100%;\n  /* 1 */\n  line-height: 1.15;\n  /* 1 */\n  margin: 0;\n  /* 2 */ }\n\n/**\r\n * Show the overflow in IE.\r\n * 1. Show the overflow in Edge.\r\n */\nbutton,\ninput {\n  /* 1 */\n  overflow: visible; }\n\n/**\r\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\r\n * 1. Remove the inheritance of text transform in Firefox.\r\n */\nbutton,\nselect {\n  /* 1 */\n  text-transform: none; }\n\n/**\r\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\r\n *    controls in Android 4.\r\n * 2. Correct the inability to style clickable types in iOS and Safari.\r\n */\nbutton,\nhtml [type=\"button\"],\n[type=\"reset\"],\n[type=\"submit\"] {\n  -webkit-appearance: button;\n  /* 2 */ }\n\n/**\r\n * Remove the inner border and padding in Firefox.\r\n */\nbutton::-moz-focus-inner,\n[type=\"button\"]::-moz-focus-inner,\n[type=\"reset\"]::-moz-focus-inner,\n[type=\"submit\"]::-moz-focus-inner {\n  border-style: none;\n  padding: 0; }\n\n/**\r\n * Restore the focus styles unset by the previous rule.\r\n */\nbutton:-moz-focusring,\n[type=\"button\"]:-moz-focusring,\n[type=\"reset\"]:-moz-focusring,\n[type=\"submit\"]:-moz-focusring {\n  outline: 1px dotted ButtonText; }\n\n/**\r\n * Change the border, margin, and padding in all browsers (opinionated).\r\n */\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em; }\n\n/**\r\n * 1. Correct the text wrapping in Edge and IE.\r\n * 2. Correct the color inheritance from `fieldset` elements in IE.\r\n * 3. Remove the padding so developers are not caught out when they zero out\r\n *    `fieldset` elements in all browsers.\r\n */\nlegend {\n  box-sizing: border-box;\n  /* 1 */\n  color: inherit;\n  /* 2 */\n  display: table;\n  /* 1 */\n  max-width: 100%;\n  /* 1 */\n  padding: 0;\n  /* 3 */\n  white-space: normal;\n  /* 1 */ }\n\n/**\r\n * 1. Add the correct display in IE 9-.\r\n * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.\r\n */\nprogress {\n  display: inline-block;\n  /* 1 */\n  vertical-align: baseline;\n  /* 2 */ }\n\n/**\r\n * Remove the default vertical scrollbar in IE.\r\n */\ntextarea {\n  overflow: auto; }\n\n/**\r\n * 1. Add the correct box sizing in IE 10-.\r\n * 2. Remove the padding in IE 10-.\r\n */\n[type=\"checkbox\"],\n[type=\"radio\"] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */ }\n\n/**\r\n * Correct the cursor style of increment and decrement buttons in Chrome.\r\n */\n[type=\"number\"]::-webkit-inner-spin-button,\n[type=\"number\"]::-webkit-outer-spin-button {\n  height: auto; }\n\n/**\r\n * 1. Correct the odd appearance in Chrome and Safari.\r\n * 2. Correct the outline style in Safari.\r\n */\n[type=\"search\"] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  outline-offset: -2px;\n  /* 2 */ }\n\n/**\r\n * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.\r\n */\n[type=\"search\"]::-webkit-search-cancel-button,\n[type=\"search\"]::-webkit-search-decoration {\n  -webkit-appearance: none; }\n\n/**\r\n * 1. Correct the inability to style clickable types in iOS and Safari.\r\n * 2. Change font properties to `inherit` in Safari.\r\n */\n::-webkit-file-upload-button {\n  -webkit-appearance: button;\n  /* 1 */\n  font: inherit;\n  /* 2 */ }\n\n/* Interactive\r\n   ========================================================================== */\n/*\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in Edge, IE, and Firefox.\r\n */\ndetails,\nmenu {\n  display: block; }\n\n/*\r\n * Add the correct display in all browsers.\r\n */\nsummary {\n  display: list-item; }\n\n/* Scripting\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 9-.\r\n */\ncanvas {\n  display: inline-block; }\n\n/**\r\n * Add the correct display in IE.\r\n */\ntemplate {\n  display: none; }\n\n/* Hidden\r\n   ========================================================================== */\n/**\r\n * Add the correct display in IE 10-.\r\n */\n[hidden] {\n  display: none; }\n\n.indexWrapper__form {\n  width: 90%;\n  padding: 15px 5% 30px;\n  background-color: #eaeaea; }\n\n.indexWrapper__filter {\n  width: 90%;\n  margin: 0 5% 25px; }\n\n.header {\n  display: flex;\n  align-items: center;\n  height: 50px;\n  background-color: #222223;\n  color: #fff; }\n  .header__headText {\n    width: 90%;\n    margin: 0 5%;\n    font-style: italic; }\n\n.form {\n  display: flex;\n  flex-direction: column; }\n  .form__header {\n    font-weight: bold; }\n  .form__postName {\n    height: 45px;\n    border: 2px solid #e6e6e6;\n    margin-bottom: 20px;\n    padding: 0px 30px; }\n  .form__postText {\n    border: 2px solid #e6e6e6;\n    margin-bottom: 20px;\n    resize: none;\n    padding: 15px 30px; }\n  .form__submit {\n    width: 35%;\n    align-self: flex-end;\n    background-color: #222223;\n    border: 2px solid #222223;\n    color: #fff;\n    padding: 12px 0; }\n\n.post {\n  color: #283645; }\n  .post--active {\n    background-color: #efefef; }\n    .post--active > .post__wrapper {\n      border-top: 1px solid #E2DEDE;\n      border-bottom: 1px solid #E2DEDE; }\n  .post__wrapper {\n    width: 90%;\n    margin: 0 5%;\n    padding: 30px 0;\n    border-top: 1px solid #fff;\n    border-bottom: 1px solid #fff; }\n  .post__header {\n    font-size: 1.5em;\n    color: #283645;\n    text-decoration: none; }\n    .post__header:hover {\n      text-decoration: underline; }\n  .post__text {\n    width: 90%;\n    margin-top: 15px; }\n\n.filter {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  background-color: #efefef;\n  cursor: pointer;\n  height: 40px; }\n  .filter__text {\n    color: #283645; }\n\n.detailPost {\n  margin: 0 5%;\n  color: #283645; }\n  .detailPost__topic {\n    font-weight: normal; }\n  .detailPost__backButton {\n    margin-top: 35px; }\n\n.backButton {\n  color: #283645;\n  padding: 10px 20px 10px 50px;\n  width: max-content;\n  position: relative;\n  background-color: #eaeaea;\n  cursor: pointer;\n  border: none; }\n  .backButton::before {\n    content: '';\n    position: absolute;\n    border-top: 2px solid #283645;\n    border-left: 14px solid #283645;\n    transform: rotate(-45deg);\n    left: 20px;\n    top: 12px; }\n  .backButton::after {\n    content: '';\n    position: absolute;\n    border-top: 2px solid #283645;\n    border-left: 14px solid #283645;\n    transform: rotate(45deg);\n    left: 20px;\n    top: 22px; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports) {
 
 /*
@@ -26873,7 +26907,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -26929,7 +26963,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(144);
+var	fixUrls = __webpack_require__(145);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -27245,7 +27279,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 144 */
+/* 145 */
 /***/ (function(module, exports) {
 
 
