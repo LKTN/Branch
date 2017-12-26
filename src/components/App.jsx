@@ -1,17 +1,25 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import DetailView from './DetailView.jsx';
 import Header from './Header.jsx';
-import Form from './Form.jsx';
-import PostList from './PostList.jsx';
-import Filter from './Filter.jsx';
+import IndexWrapper from './IndexWrapper.jsx';
+
+const FourOhFour = () => <h1>404</h1>;
 
 let App = () => {
   return (
+    <BrowserRouter>
       <div>
         <Header />
-        <Form />
-        <PostList />
-        <Filter />
+
+        <Switch>
+          <Route exact path='/' component={IndexWrapper} />
+          <Route path='/:id' component={DetailView} />
+          <Route component={FourOhFour} />
+        </Switch>
       </div>
+    </BrowserRouter>
+
     )
 }
 

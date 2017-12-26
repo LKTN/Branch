@@ -2,20 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Post from './Post.jsx';
 
-const mapStateToProps = state => {
-  switch(state.showAll) {
-    case true:
-      return state
-    case false:
-      return state
-    default:
-      return state
-  }
-}
-
 let postList = ({posts, showAll}) => {
     var listPosts = posts.map((post, ind) => (
-      <Post title={post.topic} text={post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text} key={ind} />
+      <Post title={post.topic} text={post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text} id={post.id} key={ind} />
     )).reverse();
 
     if(!showAll) {
@@ -26,7 +15,7 @@ let postList = ({posts, showAll}) => {
 }
 
 const PostList = connect(
-  mapStateToProps
+  state => state
 )(postList);
 
 export default PostList;

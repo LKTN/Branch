@@ -4,7 +4,7 @@ import { toggleFilter } from '../actions/index.js'
 
 let Filter = (props) => {
   return (
-    <div className='filter' onClick={() => props.onFilterClick()}>
+    <div className={`filter ${props.className}`} onClick={() => props.onFilterClick()}>
       <span className='filter__text'>{props.showAll ? 'Скрыть' : 'Показать еще'}</span>
     </div>
   )
