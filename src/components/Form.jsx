@@ -5,7 +5,7 @@ import { addPost } from '../actions/index.js';
 class Form extends React.Component {
   render() {
     return (
-      <form className={`form ${this.props.className}`}>
+      <form className={`form ${this.props.className ? this.props.className : ''}`}>
         <p className='form__header'>Форма создания поста</p>
         <input type='text' name='postName' className='form__postName' placeholder='Название поста' ref={ (topic) => {this.topic = topic} }/>
         <textarea rows="10" cols="45" name="postText" className='form__postText' placeholder='Содержание поста' ref={ (text) => {this.text = text} }></textarea>

@@ -1,0 +1,29 @@
+.backButton {
+  color: #283645;
+  padding: 10px 20px 10px 50px;
+  width: max-content;
+  position: relative;
+  background-color: #eaeaea;
+  cursor: pointer;
+  border: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border-top: 2px solid #283645;
+    border-left: 14px solid #283645;
+    transform: rotate(-45deg);
+    left: 20px;
+    top: 12px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    border-top: 2px solid #283645;
+    border-left: 14px solid #283645;
+    transform: rotate(45deg);
+    left: 20px;
+    top: 22px;
+  }
+}
