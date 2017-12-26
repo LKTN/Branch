@@ -11,6 +11,7 @@ class Form extends React.Component {
         <textarea rows="10" cols="45" name="postText" className='form__postText' placeholder='Содержание поста' ref={ (text) => {this.text = text} }></textarea>
         <input type="submit" value="Создать пост" className='form__submit' onClick={(evt) => {
           evt.preventDefault();
+          let posts = this.props.posts;
 
           let topic = this.topic.value;
           let text = this.text.value;
@@ -20,7 +21,27 @@ class Form extends React.Component {
             return
           }
 
-          this.props.dispatch( addPost(topic, text) )
+          let slug = topic.toLowerCase().trim().split(' ').join('-');
+
+          console.log(slug, posts);
+
+          for (var i = posts.length - 1; i >= 0; i--) {
+            if(posts[i].slug === slug) {
+              
+              if(posts[i].countSameSlug) {
+                posts[i].countSameSlug += 1; 
+              } else {
+                posts[i].countSameSlug = 1; 
+              }
+
+              slug = slug + '-' + posts[i].countSameSlug;
+
+            }
+          }
+
+          console.log(slug);
+
+          this.props.dispatch( addPost(topic, text, slug) )
 
           this.topic.value = '';
           this.text.value = '';
@@ -30,4 +51,4 @@ class Form extends React.Component {
   }
 }
 
-export default connect()(Form);
+export default connect( state => ({posts: state.posts}) )(Form);

@@ -3474,12 +3474,12 @@ var _v2 = _interopRequireDefault(_v);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var addPost = exports.addPost = function addPost(topic, text) {
+var addPost = exports.addPost = function addPost(topic, text, slug) {
   return {
     type: 'ADD_POST',
     topic: topic,
     text: text,
-    id: (0, _v2.default)()
+    slug: slug
   };
 };
 
@@ -23236,7 +23236,7 @@ Object.defineProperty(exports, "__esModule", {
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var initialState = {
-  posts: [{ topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.', id: '110ec58a-a0f2-4ac4-8393-c866d813b8d1' }, { topic: 'Соданный пост 2', text: '[mapDispatchToProps(dispatch, [ownProps]): dispatchProps] (Object or Function): If an object is passed, each function inside it is assumed to be a Redux action creator. An object with the same function names, but with every action creator wrapped into a dispatch call so they may be invoked directly, will be merged into the component\’s props.', id: '6c84fb90-12c4-11e1-840d-7b25c5ee775a' }],
+  posts: [{ topic: 'Соданный пост 1', text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi nesciunt explicabo earum perferendis ea, minima numquam repudiandae, deleniti porro eligendi modi nulla, voluptas iure ipsa.', slug: 'соданный-пост-1' }, { topic: 'Соданный пост 2', text: '[mapDispatchToProps(dispatch, [ownProps]): dispatchProps] (Object or Function): If an object is passed, each function inside it is assumed to be a Redux action creator. An object with the same function names, but with every action creator wrapped into a dispatch call so they may be invoked directly, will be merged into the component\’s props.', slug: 'соданный-пост-2' }],
   showAll: false
 };
 
@@ -23250,7 +23250,7 @@ var blogApp = function blogApp() {
         posts: [].concat(_toConsumableArray(state.posts), [{
           topic: action.topic,
           text: action.text,
-          id: action.id
+          slug: action.slug
         }]),
         showAll: state.showAll
       };
@@ -23319,7 +23319,7 @@ var App = function App() {
         _reactRouterDom.Switch,
         null,
         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _IndexWrapper2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/:id', component: _DetailPost2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/:slug', component: _DetailPost2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { component: FourOhFour })
       )
     )
@@ -26312,9 +26312,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var DetailView = function DetailView(props) {
   var currentPost = props.posts.find(function (post) {
-    return post.id === props.match.params.id;
+    return post.slug === props.match.params.slug;
   });
-  console.log(props);
   return _react2.default.createElement(
     'div',
     { className: 'detailPost' },
@@ -26506,6 +26505,7 @@ var Form = function (_React$Component) {
           } }),
         _react2.default.createElement('input', { type: 'submit', value: '\u0421\u043E\u0437\u0434\u0430\u0442\u044C \u043F\u043E\u0441\u0442', className: 'form__submit', onClick: function onClick(evt) {
             evt.preventDefault();
+            var posts = _this2.props.posts;
 
             var topic = _this2.topic.value;
             var text = _this2.text.value;
@@ -26515,7 +26515,26 @@ var Form = function (_React$Component) {
               return;
             }
 
-            _this2.props.dispatch((0, _index.addPost)(topic, text));
+            var slug = topic.toLowerCase().trim().split(' ').join('-');
+
+            console.log(slug, posts);
+
+            for (var i = posts.length - 1; i >= 0; i--) {
+              if (posts[i].slug === slug) {
+
+                if (posts[i].countSameSlug) {
+                  posts[i].countSameSlug += 1;
+                } else {
+                  posts[i].countSameSlug = 1;
+                }
+
+                slug = slug + '-' + posts[i].countSameSlug;
+              }
+            }
+
+            console.log(slug);
+
+            _this2.props.dispatch((0, _index.addPost)(topic, text, slug));
 
             _this2.topic.value = '';
             _this2.text.value = '';
@@ -26527,7 +26546,9 @@ var Form = function (_React$Component) {
   return Form;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)()(Form);
+exports.default = (0, _reactRedux.connect)(function (state) {
+  return { posts: state.posts };
+})(Form);
 
 /***/ }),
 /* 135 */
@@ -26661,7 +26682,7 @@ var postList = function postList(_ref) {
       showAll = _ref.showAll;
 
   var listPosts = posts.map(function (post, ind) {
-    return _react2.default.createElement(_Post2.default, { title: post.topic, text: post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text, id: post.id, key: ind });
+    return _react2.default.createElement(_Post2.default, { title: post.topic, text: post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text, slug: post.slug, key: ind });
   }).reverse();
 
   if (!showAll) {
@@ -26706,7 +26727,7 @@ var Post = function Post(props) {
       _react2.default.createElement(
         _reactRouterDom.Link,
         {
-          to: props.id ? props.id : '/',
+          to: props.slug ? props.slug : '/',
           className: 'post__header',
           onMouseOver: function onMouseOver(evt) {
             evt.target.parentElement.parentElement.classList.add('post--active');

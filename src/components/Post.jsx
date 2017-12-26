@@ -6,7 +6,7 @@ let Post = (props) => {
     <article className='post'>
       <div className='post__wrapper'>
         <Link 
-          to={props.id ? props.id : '/'}
+          to={props.slug ? props.slug : '/'}
           className='post__header'
           onMouseOver={(evt) => {evt.target.parentElement.parentElement.classList.add('post--active')}}
           onMouseOut={(evt) => {evt.target.parentElement.parentElement.classList.remove('post--active')}}

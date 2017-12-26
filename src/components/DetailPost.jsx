@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import BackButton from './BackButton.jsx'
 
 let DetailView = (props) => {
-  var currentPost = props.posts.find(post => post.id === props.match.params.id);
+  var currentPost = props.posts.find(post => post.slug === props.match.params.slug);
   return (
     <div className='detailPost'>
       <BackButton className='detailPost__backButton' goBack={props.history.goBack} />

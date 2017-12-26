@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import DetailView from './DetailPost.jsx';
+import DetailPost from './DetailPost.jsx';
 import Header from './Header.jsx';
 import IndexWrapper from './IndexWrapper.jsx';
 
@@ -14,7 +14,7 @@ let App = () => {
 
         <Switch>
           <Route exact path='/' component={IndexWrapper} />
-          <Route path='/:id' component={DetailView} />
+          <Route path='/:slug' component={DetailPost} />
           <Route component={FourOhFour} />
         </Switch>
       </div>

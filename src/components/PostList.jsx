@@ -4,7 +4,7 @@ import Post from './Post.jsx';
 
 let postList = ({posts, showAll}) => {
     var listPosts = posts.map((post, ind) => (
-      <Post title={post.topic} text={post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text} id={post.id} key={ind} />
+      <Post title={post.topic} text={post.text.charAt(150) ? post.text.slice(0, 150) + '...' : post.text} slug={post.slug} key={ind} />
     )).reverse();
 
     if(!showAll) {
