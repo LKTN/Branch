@@ -23,8 +23,6 @@ class Form extends React.Component {
 
           let slug = topic.toLowerCase().trim().split(' ').join('-');
 
-          console.log(slug, posts);
-
           for (var i = posts.length - 1; i >= 0; i--) {
             if(posts[i].slug === slug) {
               
@@ -38,8 +36,6 @@ class Form extends React.Component {
 
             }
           }
-
-          console.log(slug);
 
           this.props.dispatch( addPost(topic, text, slug) )
 

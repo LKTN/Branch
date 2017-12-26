@@ -24,4 +24,4 @@ const mapDispatchToProps = ( dispatch ) => {
 
 Filter = connect(mapStateToProps, mapDispatchToProps)(Filter);
 
-export default Filter
+export default Filter;

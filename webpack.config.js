@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/dist');
+var BUILD_DIR = path.resolve(__dirname, 'dist');
 var APP_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'src'),
+    contentBase: path.resolve(__dirname, 'dist'),
     historyApiFallback: true
   }
 }
